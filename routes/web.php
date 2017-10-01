@@ -17,10 +17,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', function(){
+    return redirect(route('news.index'));
+})->name('home');
 
 Route::get('/verifyemail/{token}', 'EmailVerificationController@show');
 
 Route::post('/verifyemail/{token}', 'EmailVerificationController@update');
 
 Route::resource('news', 'NewsContoller');
+Route::get('/myposts', 'NewsContoller@showmyposts')->name('myposts');

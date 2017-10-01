@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class News extends Model
 {
     //
+    public $fillable = ['title', 'image', 'description', 'user_id'];
 
     public function user()
     {

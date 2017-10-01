@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\News;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NewsContoller extends Controller
 {
@@ -16,7 +17,20 @@ class NewsContoller extends Controller
     {
         // Fetch last 10 news 
         $news_list = News::with('user')->orderBy('created_at','desc')->take(10)->get();
-        return View('news.list',['news_list' => $news_list]);
+        return View('news.list',['news_list' => $news_list, 'mylist' => false]);
+
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showmyposts()
+    {
+        // Show users posts
+        $news_list = News::where('user_id' , Auth::id())->orderBy('created_at','desc')->get();
+        return View('news.list',['news_list' => $news_list, 'mylist' => true]);
 
     }
 
@@ -27,7 +41,9 @@ class NewsContoller extends Controller
      */
     public function create()
     {
-        //
+        // show news creation form
+
+        return View('news.create');
     }
 
     /**
@@ -39,6 +55,15 @@ class NewsContoller extends Controller
     public function store(Request $request)
     {
         //
+        $create_req = $request->all(['title','description']);
+        $create_req['user_id'] = Auth::id();
+
+        if ($request->hasFile('image')) {
+            $path = \basename($request->image->store('public'));
+            $create_req['image'] = $path;
+        }
+        News::create($create_req);
+        return redirect(route('myposts'))->with('msg','News created Succssfully');
     }
 
     /**
@@ -50,6 +75,7 @@ class NewsContoller extends Controller
     public function show(News $news)
     {
         //
+        return View('news.detail',['news' => $news]);
     }
 
     /**
@@ -83,6 +109,11 @@ class NewsContoller extends Controller
      */
     public function destroy(News $news)
     {
-        //
+        // 
+        if($news->user->id !== Auth::id()) {
+            throw new Exception('Not Allowed operation');
+        }
+        $news->delete();
+        return redirect(route('myposts'))->with('msg','News removed Succssfully');
     }
 }
