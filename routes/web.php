@@ -28,3 +28,11 @@ Route::post('/verifyemail/{token}', 'EmailVerificationController@update');
 
 Route::resource('news', 'NewsContoller');
 Route::get('/myposts', 'NewsContoller@showmyposts')->name('myposts');
+Route::get('/printnews/{news}', 'NewsContoller@printnews')->name('printnews');
+
+Route::get('testpdf', function() {
+    // This is test route to check if dompdf is working fine or not 
+    $pdf = App::make('dompdf.wrapper');
+    $pdf->loadHTML('<h1>Test</h1>');
+    return $pdf->stream();
+});

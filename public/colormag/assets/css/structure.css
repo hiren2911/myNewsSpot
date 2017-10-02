@@ -65,7 +65,7 @@ h2{font-family:'Varela',sans-serif}
 .stuff_article_inner{float:left; display:inline; width:100%}
 .stuff_date{background-color:#ffd62c; border-radius:3px; color:#fff; float:left; font-size:14px; margin:10px 15px 0 0; padding:5px 8px; text-align:center; width:66px}
 .stuff_date strong{font-size:20px}
-.stuff_article_inner h2{font-size:24px; line-height:1.5em; margin:0; padding:5px 0 0}
+.stuff_article_inner h2{font-size:24px; line-height:1.5em; margin:0; padding:5px 0 0;text-transform:capitalize;}
 .stuff_article_inner h2 > a{color:#444}
 .stuff_article_inner p{line-height:1.5em; padding:10px 0}
 .middlebar_content{float:left; display:inline; width:126%; background-color:#fff; min-height:200px}
@@ -111,7 +111,7 @@ h2{font-family:'Varela',sans-serif}
 .singlepost_area{float:left; display:inline; width:100%}
 .singlepost_content{background-color:#fff; display:inline; float:left; margin-bottom:25px; margin-left:15px; padding:20px; width:95%}
 .singlepost_content img{margin-top:15px; margin-bottom:15px}
-.singlepost_content h2{font-size:24px; line-height:1.5em; margin:0; padding:5px 0 0}
+.singlepost_content h2{font-size:24px; line-height:1.5em; margin:0; padding:5px 0 0;text-transform:capitalize;}
 .singlepost_content p{background-color:white; border:0 none; color:#333; font-family:Arial,sans-serif; font-size:13px; line-height:20.8px; margin:0 0 10px; padding:0; text-align:justify; vertical-align:baseline}
 .singlepost_content blockquote{font-family:arial; font-style:italic}
 .singlepost_content > ul{padding-left:15px}
@@ -187,3 +187,5 @@ h2{font-family:'Varela',sans-serif}
 .stuff_article_inner h2{line-height:1em}
 .stuff_article_inner h2 > a{font-size:16px}
 }
+
+.author_icon {font-size:85px; color:#e76b33;}
