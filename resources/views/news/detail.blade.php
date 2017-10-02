@@ -2,9 +2,9 @@
 
 @section('content')
 
-<h2>The New Detail</h2>
+    <h2>The New Detail</h2>
 
-<div class="singlepost_area">
+    <div class="singlepost_area">
         <div class="singlepost_content"> 
             <span class="stuff_date">{{ $news->created_at->format('d M')}} <strong>{{ $news->created_at->format('y')}}</strong></span>
             <h2>{{ $news->title }}

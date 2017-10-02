@@ -8,7 +8,7 @@
                 <div class="panel-heading">Email Verificaion</div>
 
                 <div class="panel-body">
-                    <p>A verification link is sent to your register email address. Please click on link to login.</p>
+                    <p>A verification link is sent to your register email address. Please click on link to verify your account.</p>
                 </div>
             </div>
         </div>

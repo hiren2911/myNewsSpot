@@ -34,11 +34,12 @@ class EmailVerificationController extends Controller
     {
          $this->validator($request->all())->validate();
          $user = User::where('verification_token', $token)->first();
+         // update user status to verified and set password
          $user->verification_status = '1';
          $user->password = bcrypt($request->get('password'));
          $user->save();
          Auth::login($user);
-         return redirect('/home');
+         return redirect(route('news.index'));
         
     }
 }

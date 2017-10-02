@@ -11,6 +11,11 @@ use Barryvdh\DomPDF\Facade as PDF;
 
 class NewsContoller extends Controller
 {
+    public function __construct()
+    {
+        
+        $this->middleware('auth', ['only' => ['store','create', 'destroy', 'showmyposts']]);
+    }
     /**
      * Display a listing of the resource.
      *

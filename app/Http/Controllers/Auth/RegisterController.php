@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
+use App\Mail\EmailVerification;
 
 class RegisterController extends Controller
 {
@@ -83,13 +85,11 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
         
-        // APP : remove default login logic and show verfication email sent message
+        // Send verification email
+        $email = new EmailVerification($user);
+        Mail::to($user->email)->send($email);
 
-        // $this->guard()->login($user);
-
-        // return $this->registered($request, $user)
-        //                 ?: redirect($this->redirectPath());
-
+        // Show message
         return view('auth.verification_sent');
     }
 }

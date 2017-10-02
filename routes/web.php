@@ -12,27 +12,26 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect(route('news.index'));
 });
 
 Auth::routes();
 
 Route::feeds();
 
-// Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home', function(){
     return redirect(route('news.index'));
 })->name('home');
 
-Route::get('/verifyemail/{token}', 'EmailVerificationController@show');
+Route::get('/verifyemail/{token}', 'EmailVerificationController@show')->middleware('guest');
 
-Route::post('/verifyemail/{token}', 'EmailVerificationController@update');
+Route::post('/verifyemail/{token}', 'EmailVerificationController@update')->middleware('guest');
 
-Route::resource('news', 'NewsContoller');
+Route::resource('news', 'NewsContoller',['except' => [ 'update', 'edit' ]]);
 Route::get('/myposts', 'NewsContoller@showmyposts')->name('myposts');
 Route::get('/printnews/{news}', 'NewsContoller@printnews')->name('printnews');
 
-Route::get('testpdf', function() {
+Route::get('/testpdf', function() {
     // This is test route to check if dompdf is working fine or not 
     $pdf = App::make('dompdf.wrapper');
     $pdf->loadHTML('<h1>Test</h1>');
