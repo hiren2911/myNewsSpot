@@ -6,6 +6,7 @@ use App\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 
 use Barryvdh\DomPDF\Facade as PDF;
 
@@ -25,12 +26,12 @@ class NewsContoller extends Controller
     {
         // Fetch last 10 news 
         $news_list = News::with('user')->orderBy('created_at','desc')->take(10)->get();
-        return View('news.list',['news_list' => $news_list, 'mylist' => false]);
+        return view('news.list',['news_list' => $news_list, 'mylist' => false]);
 
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of logedin user's news.
      *
      * @return \Illuminate\Http\Response
      */
@@ -38,7 +39,7 @@ class NewsContoller extends Controller
     {
         // Show users posts
         $news_list = News::where('user_id' , Auth::id())->orderBy('created_at','desc')->get();
-        return View('news.list',['news_list' => $news_list, 'mylist' => true]);
+        return view('news.list',['news_list' => $news_list, 'mylist' => true]);
 
     }
 
@@ -50,8 +51,7 @@ class NewsContoller extends Controller
     public function create()
     {
         // show news creation form
-
-        return View('news.create');
+        return view('news.create');
     }
 
     /**
@@ -65,13 +65,15 @@ class NewsContoller extends Controller
         //
         $create_req = $request->all(['title','description']);
         $create_req['user_id'] = Auth::id();
-
+        // remove any html tags from the content
+        $create_req['description'] = \strip_tags($create_req['description']);
         if ($request->hasFile('image')) {
             $path = \basename($request->image->store('public'));
             $create_req['image'] = $path;
         }
         News::create($create_req);
-        return redirect(route('myposts'))->with('msg','News created Succssfully');
+        Session::flash('flash_message', 'News created Successfully');
+        return redirect(route('myposts'));
     }
 
     /**
@@ -98,29 +100,6 @@ class NewsContoller extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\News  $news
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(News $news)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\News  $news
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, News $news)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\News  $news
@@ -133,6 +112,7 @@ class NewsContoller extends Controller
             throw new Exception('Not Allowed operation');
         }
         $news->delete();
-        return redirect(route('myposts'))->with('msg','News removed Succssfully');
+        Session::flash('flash_message', 'News removed Successfully');
+        return redirect(route('myposts'));
     }
 }

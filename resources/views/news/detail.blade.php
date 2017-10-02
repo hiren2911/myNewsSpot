@@ -14,7 +14,7 @@
             </h2>
             <img class="img-center" src="{{ asset('storage/' . $news->image) }}" alt="Image Not Found">
             
-            <p> {!! nl2br($news->description) !!} </p>
+            <p> {!! nl2br(strip_tags($news->description)) !!} </p>
 
 
             

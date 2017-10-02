@@ -6,11 +6,16 @@ use Illuminate\Http\Request;
 use App\User;
 use \Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Session;
 
 class EmailVerificationController extends Controller
 {
-    //
-
+   /**
+    * Show user's verification status
+    * @param string $token user's unique token
+    * @param Request $request Http request object
+    * @return \Illuminate\Http\Response
+    */
     public function show($token)
     {
         $user = User::where('verification_token', $token)->first();
@@ -18,7 +23,7 @@ class EmailVerificationController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Get a validator for an incoming upate verification request.
      *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
@@ -30,6 +35,13 @@ class EmailVerificationController extends Controller
         ]);
     }
 
+
+    /**
+    * Update user's verification status
+    * @param string $token user's unique token
+    * @param Request $request Http request object
+    * @return \Illuminate\Http\Response
+    */
     public function update($token, Request $request)
     {
          $this->validator($request->all())->validate();
@@ -38,6 +50,9 @@ class EmailVerificationController extends Controller
          $user->verification_status = '1';
          $user->password = bcrypt($request->get('password'));
          $user->save();
+
+         Session::flash('flash_message', 'Account verified Successfully');
+         // make user login and redirect to news listing
          Auth::login($user);
          return redirect(route('news.index'));
         

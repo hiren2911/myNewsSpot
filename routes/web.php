@@ -11,17 +11,13 @@
 |
 */
 
-Route::get('/', function () {
-    return redirect(route('news.index'));
-});
+Route::get('/', 'NewsContoller@index');
 
 Auth::routes();
 
 Route::feeds();
 
-Route::get('/home', function(){
-    return redirect(route('news.index'));
-})->name('home');
+Route::get('/home', 'NewsContoller@index')->name('home');
 
 Route::get('/verifyemail/{token}', 'EmailVerificationController@show')->middleware('guest');
 

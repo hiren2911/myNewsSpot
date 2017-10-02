@@ -12,7 +12,7 @@
                                 <button class="btn-primary" onclick="return confirm('Are you sure you want to delete this iteam?')">Delete</button>
                             </form>
             @endif
-            <p>{{ $news->description }}</p>
+            <p><p> {!! nl2br( substr(strip_tags($news->description),0,200) ) !!} {{ strlen(strip_tags($news->description)) > 200 ? '...' : ''  }}</p></p>
             </div>
         </div>
     </div>

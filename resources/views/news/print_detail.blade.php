@@ -7,7 +7,7 @@
             <h2>Title:{{ $news->title }}</h2>
             <h4>Publish Date: {{ $news->created_at->format('d M y H:i:s') }}</h4>
             <img class="img-center" src="{{ asset('storage/' . $news->image) }}" alt="Image Not Found">
-            <p> {!! nl2br($news->description) !!} </p>
+            <p> {!! nl2br(strip_tags($news->description)) !!} </p>
 
             <div class="author"> 
                 <div class="author_details">
