@@ -13,6 +13,8 @@
     <!-- Styles -->
     <!--<link href="{{ asset('css/app.css') }}" rel="stylesheet">-->
 
+    @include('feed::links')
+
     <link rel="stylesheet" href="/colormag/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/colormag/assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="/colormag/assets/css/font.css">
@@ -44,13 +46,8 @@
                 <li><a href="{{ route('login') }}">Login</a></li>
                 <li><a href="{{ route('register') }}">Register</a></li>
             @else
-                    <li><a href="{{ route('myposts') }}">My Posts</a></li>
-                    <li><a href="{{ route('news.create') }}">New News</a></li>
-                    <!--<li><a href="{{ route('logout') }}"
-                                onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
-                                Logout
-                            </a></li>-->
+                <li><a href="{{ route('myposts') }}">My Posts</a></li>
+                <li><a href="{{ route('news.create') }}">New News</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                         {{ Auth::user()->name }} <span class="caret"></span>
@@ -71,26 +68,6 @@
                     </ul>
                 </li>
             @endguest
-
-            <!--<li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Jobs</a>
-              <ul class="dropdown-menu" role="menu">
-                <li class="dropdown"> <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" href="#">Jobs Home</a> </li>
-                <li><a href="#">Faq</a></li>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Article</a></li>
-              </ul>
-            </li>
-            <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Features</a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Standard Blog Layout</a></li>
-                <li><a href="#">Post With Comments</a></li>
-                <li><a href="#">Page:Right Sidebar</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Shortcodes</a></li>
-            <li><a href="#">Archive</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Download Template</a></li>-->
           </ul>
         </div>
       </div>
@@ -193,8 +170,8 @@
     <div class="row">
       <div class="col-md-12">
         <div class="footer_inner">
-          <p class="pull-left">Copyright &copy; 2014 ColorMag</p>
-          <p class="pull-right">Developed By WpFreeware</p>
+          <p class="pull-left">Copyright &copy; 2014 My News Spot</p>
+          <p class="pull-right">Developed By Hiren Shah</p>
         </div>
       </div>
     </div>
