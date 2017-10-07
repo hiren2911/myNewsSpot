@@ -16,25 +16,11 @@ class NewsControllerTest extends TestCase
     {
         $response = $this->get('/news');
         $response->assertStatus(200);
-        $response->assertSeeText('The New Stuff');
+        $response->assertSeeText('News Highlights');
         $response->assertViewHas('news_list');
         $news_list = $response->original->getData()['news_list'];
  
         $this->assertInstanceOf('Illuminate\Database\Eloquent\Collection', $news_list);
-
-    }
-
-    /**
-     * A basic test case for show method
-     *
-     * @return void
-     */
-    public function testShow()
-    {
-        $response = $this->get('/news/1');
-        $response->assertStatus(200);
-        $response->assertSeeText('New Detail');
-        $response->assertViewHas('news');
 
     }
 

@@ -8,7 +8,7 @@ use Spatie\Feed\FeedItem;
 
 class News extends Model implements Feedable
 {
-    //
+    
     public $fillable = ['title', 'image', 'description', 'user_id'];
 
     public function user()
@@ -29,6 +29,6 @@ class News extends Model implements Feedable
 
     public static function getFeedItems()
     {
-        return News::all();
+        return News::orderBy('created_at','desc')->take(10)->get();
     }
 }

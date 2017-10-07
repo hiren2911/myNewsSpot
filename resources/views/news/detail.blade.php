@@ -12,7 +12,7 @@
                     <a href="{{route('printnews', $news->id)}}" title="Download Artical in PDF format" target="_blank"><i class="fa fa-print"></i></a>
                 </span>
             </h2>
-            <img class="img-center" src="{{ asset('storage/' . $news->image) }}" alt="Image Not Found">
+            <img class="img-center" src="{{ asset('storage/' . $news->image) }}" style="max-width:1157px;" alt="Image Not Found">
             
             <p> {!! nl2br(strip_tags($news->description)) !!} </p>
 

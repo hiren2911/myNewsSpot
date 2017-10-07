@@ -5,6 +5,8 @@ Hello {{ $user->name }},
 
 {{ url('/verifyemail/'.$user->verification_token) }}
 
+<br/><br/>
 
-Regards,
+
+Regards,<br/>
 My News Spot Support

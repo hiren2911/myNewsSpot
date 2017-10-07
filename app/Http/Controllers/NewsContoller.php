@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 use Barryvdh\DomPDF\Facade as PDF;
 
@@ -54,6 +55,21 @@ class NewsContoller extends Controller
         return view('news.create');
     }
 
+     /**
+     * Get a validator for an incoming create news request.
+     *
+     * @param  array  $data
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'title' => 'required|string|max:255',
+            'image' => 'image',
+            'description' => 'required|string'
+        ]);
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -63,6 +79,14 @@ class NewsContoller extends Controller
     public function store(Request $request)
     {
         //
+        $validator = $this->validator($request->all())->validate();
+
+        if ($validator && $validator->fails()) {
+            return redirect(route('news.create'))
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
         $create_req = $request->all(['title','description']);
         $create_req['user_id'] = Auth::id();
         // remove any html tags from the content

@@ -69,10 +69,6 @@
         </div>
       </div>
     </nav>
-    <form id="searchForm">
-      <input type="text" placeholder="Search...">
-      <input type="submit" value="">
-    </form>
   </div>
 </header>
 <section id="contentbody">

@@ -2,7 +2,7 @@
 
 @section('content')
 
-<h2>{{ $mylist ? 'My Posts' : 'The New Stuff' }}</h2>
+<h2>{{ $mylist ? 'My Posts' : 'News Highlights' }}</h2>
 
     @foreach ($news_list as $news)
     @include('news.summary')
